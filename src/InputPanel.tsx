@@ -12,7 +12,7 @@ export default function inputPanel({
   iconKey,
 }: InputPanelProps) {
   return (
-    <div className="flex flex-nowrap justify-between items-center py-4 gap-4">
+    <div className="flex flex-nowrap items-center mb-2 py-4 gap-4">
       <Icon iconKey={iconKey} />
 
       <div>
