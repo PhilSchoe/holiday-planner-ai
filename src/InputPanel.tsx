@@ -22,7 +22,7 @@ export default function inputPanel({
         <div className="text-gray-300">{subtitle}</div>
         <input
           type="text"
-          className="bg-sky-700 border border-gray-300 focus:outline-none focus:border-sky-950 focus:ring-1 focus:ring-sky-950 text-gray-300 rounded-lg p-0.5 pl-2"
+          className="bg-sky-700 border border-gray-300 focus:outline-none focus:border-sky-950 focus:ring-1 focus:ring-sky-950 text-gray-300 rounded-lg p-0.5 pl-2 transition-all duration-500"
           onChange={(e) => onInputChage(e.target.value)}
         />
       </div>
