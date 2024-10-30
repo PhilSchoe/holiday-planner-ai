@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputPanel from "./InputPanel";
+import { checkAvailability, generatePrompt } from "./PromptGenerator";
 
 export default function holidayInfoInput() {
   const [location, setLocation] = useState<string>("");
@@ -8,6 +9,12 @@ export default function holidayInfoInput() {
   function handleSubmit() {
     console.log("location: ", location);
     console.log("duration: ", duration);
+
+    checkAvailability().then((isAvailable: boolean) => {
+      if (isAvailable) {
+        generatePrompt();
+      }
+    });
   }
 
   return (
