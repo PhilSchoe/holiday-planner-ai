@@ -16,6 +16,11 @@ export async function checkAvailability(): Promise<boolean> {
   }
 }
 
+// Workaround for typescript removing the type definition that generates the async iterator for ReadableStream
+interface ReadableStream<R = any> {
+  [Symbol.asyncIterator](): AsyncIterableIterator<R>;
+}
+
 export async function generatePrompt() {
   const session = await window.ai.languageModel.create();
 
@@ -23,18 +28,8 @@ export async function generatePrompt() {
     "Describe the weather in Paris in three sentences"
   );
 
-  /*
-  for (const chunk of stream) {
+  // Workaround for typescript removing the type definition that generates the async iterator for ReadableStream
+  for await (const chunk of stream as unknown as ReadableStream<string>) {
     console.log(chunk);
-  }
-  */
-
-  const reader = stream.getReader();
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) {
-      break;
-    }
-    console.log(value);
   }
 }
