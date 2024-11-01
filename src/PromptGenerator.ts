@@ -1,11 +1,11 @@
 export async function checkAvailability(): Promise<boolean> {
-  if (!window.ai) {
+  if (!self.ai || !self.ai.languageModel) {
     alert("Ai is not available");
     return false;
   }
 
   const { available, defaultTemperature, defaultTopK, maxTopK } =
-    await window.ai.languageModel.capabilities();
+    await self.ai.languageModel.capabilities();
 
   if (available !== "no") {
     alert("Ai is available");
@@ -22,7 +22,7 @@ interface ReadableStream<R = any> {
 }
 
 export async function generatePrompt() {
-  const session = await window.ai.languageModel.create();
+  const session = await self.ai.languageModel.create();
 
   const stream = session.promptStreaming(
     "Describe the weather in Paris in three sentences"
