@@ -1,12 +1,14 @@
 import { useState } from "react";
 import InputPanel from "./InputPanel";
-import { checkAvailability, generatePrompt } from "./PromptGenerator";
-import ReadableStream from "./ReadableStream";
+import { checkAvailability } from "./PromptGenerator";
 
-export default function holidayInfoInput() {
+export default function holidayInfoInput({
+  onSubmit,
+}: {
+  onSubmit: (location: string, duration: string) => Promise<void>;
+}) {
   const [location, setLocation] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
-  const [response, setResponse] = useState<string>();
 
   async function handleSubmit() {
     const isAvailable = await checkAvailability();
@@ -14,11 +16,7 @@ export default function holidayInfoInput() {
       return;
     }
 
-    const stream = await generatePrompt(location, duration);
-    // Workaround for typescript removing the type definition that generates the async iterator for ReadableStream
-    for await (const chunk of stream as unknown as ReadableStream<string>) {
-      setResponse(chunk);
-    }
+    await onSubmit(location, duration);
   }
 
   return (
@@ -45,10 +43,6 @@ export default function holidayInfoInput() {
       >
         Plan Now!
       </button>
-      <div>
-        <h1>Test</h1>
-        <p>{response}</p>
-      </div>
     </>
   );
 }

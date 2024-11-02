@@ -27,11 +27,4 @@ export async function generatePrompt(
   );
 
   return stream as unknown as ReadableStream<string>;
-
-  /*
-  // Workaround for typescript removing the type definition that generates the async iterator for ReadableStream
-  for await (const chunk of stream as unknown as ReadableStream<string>) {
-    console.log(chunk);
-  }
-    */
 }
