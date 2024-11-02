@@ -2,6 +2,7 @@ import { useState } from "react";
 import HolidayInfoInput from "./HolidayInfoInput";
 import ReadableStream from "./ReadableStream";
 import { generatePrompt } from "./PromptGenerator";
+import Markdown from "marked-react";
 
 function App() {
   const [response, setResponse] = useState<string>();
@@ -11,7 +12,8 @@ function App() {
 
     // Workaround for typescript removing the type definition that generates the async iterator for ReadableStream
     for await (const chunk of stream as unknown as ReadableStream<string>) {
-      setResponse(chunk);
+      const fullResponse = chunk.trim();
+      setResponse(fullResponse);
     }
   }
 
@@ -24,8 +26,12 @@ function App() {
 
         <HolidayInfoInput onSubmit={onSubmit} />
       </div>
-      <div className="flex flex-col items-center justify-center container relative top-16 rounded shadow-2xl bg-sky-700 mx-auto px-4 py-4 mt-4">
-        <p className="text-gray-300">{response}</p>
+      <div
+        className={`${
+          response ? "" : "invisible"
+        } flex flex-col items-center justify-center container relative top-16 rounded shadow-2xl bg-sky-700 text-gray-300 mx-auto px-4 py-4 mt-4`}
+      >
+        <Markdown>{response}</Markdown>
       </div>
     </div>
   );
