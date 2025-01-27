@@ -13,6 +13,7 @@ export default function holidayInfoInput({
   async function handleSubmit() {
     const isAvailable = await checkAvailability();
     if (!isAvailable) {
+      alert("Ai is not available");
       return;
     }
 

@@ -8,10 +8,8 @@ export async function checkAvailability(): Promise<boolean> {
     await self.ai.languageModel.capabilities();
 
   if (available !== "no") {
-    alert("Ai is available");
     return true;
   } else {
-    alert("Ai is not available");
     return false;
   }
 }
@@ -22,7 +20,7 @@ export async function getHolidayPlanning(
 ): Promise<ReadableStream<string>> {
   const session = await self.ai.languageModel.create({
     systemPrompt:
-      "You work for a travel agency and are asked to plan a vacation. The client tells you the destination and duration of their stay.",
+      "You work for a travel agency and are asked to plan a vacation. The client tells you the destination and duration of their stay. Always close your answer by wishing a nice trip",
   });
 
   const stream = session.promptStreaming(
