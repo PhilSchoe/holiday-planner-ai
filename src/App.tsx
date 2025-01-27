@@ -24,8 +24,8 @@ function App() {
   //+ 64?
 
   return (
-    <div className="min-h-screen bg-sky-950">
-      <div className="flex flex-col items-center justify-center container relative top-16 rounded shadow-2xl bg-sky-700 mx-auto px-4 py-4">
+    <div className="min-h-screen bg-sky-950 flex flex-col items-center">
+      <div className="flex flex-col items-center justify-center container rounded shadow-2xl bg-sky-700 mt-8 px-4 py-4">
         <div className="text-4xl font-bold text-gray-300 mb-6">
           Holiday Planner AI
         </div>
@@ -35,7 +35,7 @@ function App() {
       <div
         className={`${
           response ? "" : "invisible"
-        } flex flex-col items-center justify-center container relative top-16 rounded shadow-2xl bg-sky-700 text-gray-300 mx-auto px-4 py-4 mt-4`}
+        } flex flex-col items-center justify-center container rounded shadow-2xl bg-sky-700 text-gray-300 px-4 py-4 mt-4 mb-8`}
       >
         <Markdown>{response}</Markdown>
       </div>
