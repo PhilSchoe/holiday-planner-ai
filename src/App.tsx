@@ -1,21 +1,27 @@
 import { useState } from "react";
 import HolidayInfoInput from "./HolidayInfoInput";
 import ReadableStream from "./ReadableStream";
-import { generatePrompt } from "./PromptGenerator";
+import { getHolidayPlanning } from "./AiController";
 import Markdown from "marked-react";
 
 function App() {
   const [response, setResponse] = useState<string>();
 
   async function onSubmit(location: string, duration: string) {
-    const stream = await generatePrompt(location, duration);
+    const stream = await getHolidayPlanning(location, duration);
+
+    let result = "";
 
     // Workaround for typescript removing the type definition that generates the async iterator for ReadableStream
+    // Behaviour has changed, chunkgs are now successive pieces of a single long stream
     for await (const chunk of stream as unknown as ReadableStream<string>) {
-      const fullResponse = chunk.trim();
-      setResponse(fullResponse);
+      result += chunk;
+      setResponse(result);
     }
   }
+
+  //<div className="min-h-screen bg-sky-950">
+  //+ 64?
 
   return (
     <div className="min-h-screen bg-sky-950">

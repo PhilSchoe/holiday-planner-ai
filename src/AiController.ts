@@ -16,7 +16,7 @@ export async function checkAvailability(): Promise<boolean> {
   }
 }
 
-export async function generatePrompt(
+export async function getHolidayPlanning(
   location: string,
   duration: string
 ): Promise<ReadableStream<string>> {

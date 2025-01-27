@@ -1,6 +1,6 @@
 import { useState } from "react";
 import InputPanel from "./InputPanel";
-import { checkAvailability } from "./PromptGenerator";
+import { checkAvailability } from "./AiController";
 
 export default function holidayInfoInput({
   onSubmit,
