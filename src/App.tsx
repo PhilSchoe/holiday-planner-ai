@@ -20,9 +20,6 @@ function App() {
     }
   }
 
-  //<div className="min-h-screen bg-sky-950">
-  //+ 64?
-
   return (
     <div className="min-h-screen bg-sky-950 flex flex-col items-center">
       <div className="flex flex-col items-center justify-center container rounded shadow-2xl bg-sky-700 mt-8 px-4 py-4">
