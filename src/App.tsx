@@ -10,9 +10,7 @@ function App() {
   const [response, setResponse] = useState<string>();
 
   checkAvailability().then((isAvailable) => {
-    if (!isAvailable) {
-      setOpen(true);
-    }
+    setOpen(!isAvailable);
   });
 
   async function onSubmit(location: string, duration: string) {
