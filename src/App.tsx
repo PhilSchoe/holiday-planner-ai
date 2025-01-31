@@ -1,11 +1,19 @@
 import { useState } from "react";
 import HolidayInfoInput from "./HolidayInfoInput";
 import ReadableStream from "./ReadableStream";
-import { getHolidayPlanning } from "./AiController";
+import { checkAvailability, getHolidayPlanning } from "./AiController";
 import Markdown from "marked-react";
+import Modal from "./Modal";
 
 function App() {
+  const [open, setOpen] = useState<boolean>(false);
   const [response, setResponse] = useState<string>();
+
+  checkAvailability().then((isAvailable) => {
+    if (!isAvailable) {
+      setOpen(true);
+    }
+  });
 
   async function onSubmit(location: string, duration: string) {
     const stream = await getHolidayPlanning(location, duration);
@@ -36,6 +44,9 @@ function App() {
       >
         <Markdown>{response}</Markdown>
       </div>
+      <Modal open={open}>
+        <div className="text-red-500">No Ai</div>
+      </Modal>
     </div>
   );
 }

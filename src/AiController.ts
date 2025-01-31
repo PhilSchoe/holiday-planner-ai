@@ -1,6 +1,5 @@
 export async function checkAvailability(): Promise<boolean> {
   if (!self.ai || !self.ai.languageModel) {
-    alert("Ai is not available");
     return false;
   }
 
