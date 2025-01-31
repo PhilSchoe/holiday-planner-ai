@@ -45,7 +45,14 @@ function App() {
         <Markdown>{response}</Markdown>
       </div>
       <Modal open={open}>
-        <div className="text-red-500">No Ai</div>
+        <div className="flex flex-col items-center gap-4">
+          <h3 className="text-lg font-black">No Ai is available</h3>
+          <p>
+            The browser you are using does not support the needed Ai
+            capabilities to run Holiday Planner AI. <br /> Please try again with
+            a different browser.
+          </p>
+        </div>
       </Modal>
     </div>
   );

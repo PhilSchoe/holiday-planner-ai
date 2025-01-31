@@ -6,11 +6,11 @@ interface ModalProps {
 export default function Modal({ open, children }: ModalProps) {
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center ${
-        open ? "visible bg-black/20" : "invisible"
+      className={`fixed inset-0 flex items-start justify-center pt-32 ${
+        open ? "visible bg-black/30" : "invisible"
       }`}
     >
-      {children}
+      <div className="bg-white rounded shadow p-6">{children}</div>
     </div>
   );
 }
