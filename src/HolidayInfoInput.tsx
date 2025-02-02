@@ -9,6 +9,7 @@ export default function holidayInfoInput({
 }) {
   const [location, setLocation] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
   async function handleSubmit() {
     const isAvailable = await checkAvailability();
@@ -17,7 +18,9 @@ export default function holidayInfoInput({
       return;
     }
 
+    setIsProcessing(true);
     await onSubmit(location, duration);
+    setIsProcessing(false);
   }
 
   return (
@@ -37,11 +40,38 @@ export default function holidayInfoInput({
         />
       </div>
       <button
-        disabled={!location || !duration}
+        disabled={!location || !duration || isProcessing}
         type="button"
-        className="bg-sky-950 text-gray-300 rounded-lg px-5 py-2 border-2 border-transparent transition-all duration-300 hover:border-gray-300 active:bg-sky-800 disabled:opacity-50 disabled:border-transparent disabled:cursor-not-allowed disabled:active:bg-sky-950"
+        className={`inline-flex items-center bg-sky-950 text-gray-300 rounded-lg px-5 py-2 border-2 transition-all duration-300 hover:border-gray-300 active:bg-sky-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:bg-sky-950
+          ${
+            isProcessing
+              ? "opacity-50 border-gray-300 bg-sky-950"
+              : "border-transparent disabled:border-transparent"
+          }
+        `}
         onClick={handleSubmit}
       >
+        <svg
+          className={`mr-3 -ml-1 size-5 animate-spin text-white
+            ${!isProcessing ? "hidden" : ""}`}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          ></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
         Plan Now!
       </button>
     </>
