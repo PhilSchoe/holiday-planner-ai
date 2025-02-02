@@ -48,7 +48,15 @@ function App() {
           <p>
             The browser you are using does not support the needed Ai
             capabilities to run Holiday Planner AI. <br /> Please try again with
-            a different browser.
+            a different browser. Have a look at{" "}
+            <a
+              className="underline text-blue-600 hover:text-blue-800"
+              href="https://developer.chrome.com/docs/ai"
+              target="_blank"
+            >
+              this
+            </a>{" "}
+            for example.
           </p>
         </div>
       </Modal>
